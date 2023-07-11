@@ -1,0 +1,12 @@
+.nav-link-text {
+  margin: 0px 20px;
+  color: #000;
+  font-size: 14px;
+  font-weight: 700;
+  font-style: italic;
+  padding: 38px 0px;
+}
+
+.nav-link-text .active {
+  color: #211cd2;
+}
