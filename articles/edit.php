@@ -8,14 +8,19 @@ if (!isset($_SESSION['loggedin'])) {
 
 // Query Data
 $article_id = $_GET['id'];
+$author_id = $_SESSION['author_id'];
 
-$sql = "SELECT * FROM articles WHERE id = ?";
+$sql = "SELECT * FROM articles WHERE id = ? AND authors_id = ?";
 $stmt = $dbconn->prepare($sql);
-$stmt->bind_param("s", $article_id);
+$stmt->bind_param("ss", $article_id, $author_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
 $article = $result->fetch_assoc();
+
+if (empty($article)) {
+    echo "<script type='text/javascript'>alert('*ไม่สามารถเรียกดูบทความนี้ได้ เนื่องจากคุณไม่ใช่เจ้าของ');history.go(-1);</script>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="th" class="no-js">
