@@ -13,16 +13,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $passwd =  md5($_POST['password']);
 
     $sql = "SELECT * FROM authors
-            WHERE username = '$username' AND passwd = '$passwd'";
-    $result = $dbconn->query($sql);
-    $obj = $result->fetch_object();
+            WHERE username = ?
+            AND passwd = ?";
+    $stmt = $dbconn->prepare($sql);
+    $stmt->bind_param("ss", $username, $passwd);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
+    $author = $result->fetch_assoc();
+
+    if (!empty($author)) {
         $_SESSION['errMsg'] = "";
         $_SESSION['loggedin'] = true;
-        $_SESSION['username'] = $username;
-        $_SESSION['name'] = $obj->name;
-        $_SESSION['auid'] = $obj->id;
+        $_SESSION['username'] = $author['username'];
+        $_SESSION['author_id'] = $author['id'];
         header("location: /articles/myarticle.php");
         exit(0);
     } else {
@@ -54,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <?php
     include "./components/header.php";
-    echo headerComponent();
+    echo HeaderComponent();
     ?>
 
     <!--================ Start Content Area =================-->
@@ -98,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <?php
     include "./components/footer.php";
-    echo footerComponent();
+    echo FooterComponent();
     ?>
 
     <script src="./assets/js/vendor/jquery-2.2.4.min.js"></script>

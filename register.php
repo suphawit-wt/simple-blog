@@ -15,7 +15,6 @@ if (isset($_SESSION['loggedin'])) {
     <meta charset="UTF-8" />
     <title>BabyBlog</title>
 
-
     <link rel="stylesheet" href="./assets/css/linearicons.css" />
     <link rel="stylesheet" href="./assets/css/font-awesome.min.css" />
     <link rel="stylesheet" href="./assets/css/magnific-popup.css" />
@@ -32,7 +31,7 @@ if (isset($_SESSION['loggedin'])) {
 <body onload="document.registform.userid.focus();">
     <?php
     include "./components/header.php";
-    echo headerComponent();
+    echo HeaderComponent();
     ?>
 
     <!--================ Start Content Area =================-->
@@ -105,7 +104,7 @@ if (isset($_SESSION['loggedin'])) {
 
     <?php
     include "./components/footer.php";
-    echo footerComponent();
+    echo FooterComponent();
     ?>
 
     <script src="./assets/js/vendor/jquery-2.2.4.min.js"></script>

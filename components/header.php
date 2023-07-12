@@ -1,5 +1,4 @@
-<?php
-function headerComponent()
+<?php function HeaderComponent()
 { ?>
     <!--================ Start Header Area =================-->
     <header class="header-area">
@@ -17,17 +16,15 @@ function headerComponent()
                         </span>
                     </div>
                     <nav class="col navbar navbar-expand-lg justify-content-end">
-                        <!-- Toggler/collapsibe Button -->
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                             <span class="lnr lnr-menu"></span>
                         </button>
-                        <!-- Navbar links -->
                         <div class="collapse navbar-collapse menu-right" id="collapsibleNavbar">
                             <ul class="navbar-nav justify-content-center">
                                 <li class="nav-item hide-lg">
                                     <a class="nav-link-text" href="/">Home</a>
                                 </li>
-                                <?php if (isset($_SESSION['name'])) { ?>
+                                <?php if (isset($_SESSION['loggedin'])) { ?>
                                     <li class="nav-item">
                                         <div class="nav-link">
                                             <span class="mr-1">ชื่อผู้แต่ง : <?php echo $_SESSION['username']; ?> </span>

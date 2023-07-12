@@ -1,32 +1,33 @@
 <?php
-session_start();
-require_once('../db/connect.php');
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    session_start();
+    require_once('../db/connect.php');
 
-if (!isset($_SESSION['loggedin'])) {
-    header("location: /login.php");
-}
+    $author_id = $_SESSION['author_id'];
+    $article_id = $_POST['article_id'];
+    $publish_sts = $_POST['publishSts'];
+    $datetime_now = date('Y-m-d H:i:s');
 
-$arID = $_GET['id'];
-$pbsts = $_POST['publishSts'];
-$upDT = date('Y-m-d H:i:s');
-$sesU = $_SESSION['username'];
-
-$chksql = "SELECT authors.id FROM authors WHERE username = '$sesU'";
-$chksql2 = "SELECT articles.authors_id FROM articles WHERE id = $arID";
-$resultS1 = $dbconn->query($chksql);
-$resultS2 = $dbconn->query($chksql2);
-$row1 = $resultS1->fetch_object();
-$row2 = $resultS2->fetch_object();
-
-if ($row1->id == $row2->authors_id) {
-    $sql = "UPDATE articles
-            SET publish_sts = ?, updatetime = ?
-            WHERE id = ?";
+    $sql = "SELECT authors_id FROM articles WHERE id = ?";
     $stmt = $dbconn->prepare($sql);
-    $stmt->bind_param("sss", $pbsts, $upDT, $arID);
+    $stmt->bind_param("s", $article_id);
     $stmt->execute();
+    $result = $stmt->get_result();
 
-    header("location: /articles/myarticle.php");
+    $article = $result->fetch_assoc();
+
+    if ($article['authors_id'] === $author_id) {
+        $sql = "UPDATE articles
+                SET publish_sts = ?, updatetime = ?
+                WHERE id = ?";
+        $stmt = $dbconn->prepare($sql);
+        $stmt->bind_param("sss", $publish_sts, $datetime_now, $article_id);
+        $stmt->execute();
+
+        header("location: /articles/myarticle.php");
+    } else {
+        echo "<script type='text/javascript'>alert('*ไม่สามารถแก้ไขบทความนี้ได้ เนื่องจากคุณไม่ใช่เจ้าของ');history.go(-1);</script>";
+    }
 } else {
-    echo "<script type='text/javascript'>alert('แก้ไขได้เฉพาะบทความของตนเองเท่านั้น!');history.go(-1);</script>";
+    header("location: /");
 }

@@ -7,16 +7,15 @@ if (!isset($_SESSION['loggedin'])) {
 }
 
 // Query Data
-$aID = $_GET['id'];
-$sql = "SELECT *
-         FROM articles
-         WHERE id = ?";
+$article_id = $_GET['id'];
+
+$sql = "SELECT * FROM articles WHERE id = ?";
 $stmt = $dbconn->prepare($sql);
-$stmt->bind_param("s", $aID);
+$stmt->bind_param("s", $article_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
-$row = $result->fetch_object();
+$article = $result->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="th" class="no-js">
@@ -41,7 +40,7 @@ $row = $result->fetch_object();
 <body>
     <?php
     include "../components/header.php";
-    echo headerComponent();
+    echo HeaderComponent();
     ?>
 
     <!--================ Start Content Area =================-->
@@ -56,8 +55,8 @@ $row = $result->fetch_object();
                         <div class="form-group">
                             <label class="col-md-4 col-form-label">ID</label>
                             <div class="col-md-12">
-                                <input type="text" class="form-control" name="idd" value="<?php echo $row->id ?>" disabled>
-                                <input type="hidden" name="ID" value="<?php echo $row->id ?>">
+                                <input type="text" class="form-control" value="<?php echo $article['id'] ?>" disabled>
+                                <input type="hidden" name="id" value="<?php echo $article['id'] ?>">
                             </div>
                         </div>
                     </div>
@@ -65,7 +64,7 @@ $row = $result->fetch_object();
                         <div class="form-group">
                             <label class="col-md-4 col-form-label">หัวข้อ</label>
                             <div class="col-md-12">
-                                <input type="text" class="form-control" name="title" value='<?php echo $row->title ?>'>
+                                <input type="text" class="form-control" name="title" value="<?php echo $article['title'] ?>">
                             </div>
                         </div>
                     </div>
@@ -73,7 +72,7 @@ $row = $result->fetch_object();
                         <div class="form-group">
                             <label class="col-md-4 col-form-label">เนื้อหา</label>
                             <div class="col-md-12">
-                                <textarea type="text" class="form-control" name="body"><?php echo $row->body ?></textarea>
+                                <textarea type="text" class="form-control" name="body"><?php echo $article['body'] ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -82,12 +81,12 @@ $row = $result->fetch_object();
                             <label class="col-md-4 col-form-label">สถานะ</label>
                             <div class="col-md-12">
                                 <select name="publishSts" class="custom-select">
-                                    <option value='Y' <?php if ($row->publish_sts == 'Y') {
+                                    <option value='Y' <?php if ($article['publish_sts'] == 'Y') {
                                                             echo "selected";
                                                         } ?>>
                                         เผยแพร่แล้ว
                                     </option>
-                                    <option value='N' <?php if ($row->publish_sts == 'N') {
+                                    <option value='N' <?php if ($article['publish_sts'] == 'N') {
                                                             echo "selected";
                                                         } ?>>
                                         ฉบับร่าง
@@ -103,9 +102,9 @@ $row = $result->fetch_object();
                                     อัพเดท
                                 </button>
                                 &nbsp;&nbsp;
-                                <button onclick="return confirm('คุณต้องการลบข้อมูลนี้ใช่หรือไม่?')" href="/articles/delete.php?id=<?php echo $row->id ?>" class="btn btn-sm btn-danger">
+                                <a onclick="return confirm('คุณต้องการลบข้อมูลนี้ใช่หรือไม่?')" href="/articles/delete.php?id=<?php echo $article['id'] ?>" class="btn btn-sm btn-danger">
                                     ลบ
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -117,7 +116,7 @@ $row = $result->fetch_object();
 
     <?php
     include "../components/footer.php";
-    echo footerComponent();
+    echo FooterComponent();
     ?>
 
     <script src="../assets/js/vendor/jquery-2.2.4.min.js"></script>

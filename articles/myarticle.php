@@ -8,13 +8,15 @@ if (!isset($_SESSION['loggedin'])) {
 
 // Query Data
 $limit = isset($_GET['limit']) ? $_GET['limit'] : 10;
-$auid = $_SESSION['auid'];
-$sql = "SELECT *
-        FROM articles 
-        WHERE articles.authors_id = $auid
-        ORDER BY updatetime DESC";
-$result = $dbconn->query($sql);
+$author_id = $_SESSION['author_id'];
 
+$sql = "SELECT * FROM articles WHERE authors_id = ? ORDER BY updatetime DESC LIMIT 0, ?";
+$stmt = $dbconn->prepare($sql);
+$stmt->bind_param("ss", $author_id, $limit);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$articles_list = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="th" class="no-js">
@@ -42,7 +44,7 @@ $result = $dbconn->query($sql);
 <body>
     <?php
     include "../components/header.php";
-    echo headerComponent();
+    echo HeaderComponent();
     ?>
 
     <!--================ Start Content Area =================-->
@@ -62,52 +64,47 @@ $result = $dbconn->query($sql);
                             <div class="visit">สถานะ</div>
                             <div class="visit">การดำเนินการ</div>
                         </div>
-                        <?php
-                        if (!$result) {
-                            echo ("Error: " . $dbconn->error);
-                        } else {
-                            while ($row = $result->fetch_object()) { ?>
-                                <div class="table-row">
-                                    <div class="serial"><?php echo $row->id ?></div>
-                                    <div class="visit"><?php echo $row->title ?></div>
-                                    <div class="visit"><?php echo $row->create_ts ?></div>
-                                    <div class="visit"><?php echo $row->updatetime ?></div>
-                                    <div class="visit">
-                                        <h4>
-                                            <?php if ($row->publish_sts == 'Y') { ?>
-                                                <span class="badge badge-pill badge-info">เผยแพร่แล้ว</span>
-                                            <?php } else if ($row->publish_sts == 'N') { ?>
-                                                <span class="badge badge-pill badge-light">ฉบับร่าง</span>
-                                            <?php } ?>
-                                        </h4>
-                                    </div>
-                                    <div class="visit">
-                                        <a href="edit.php?id=<?php echo $row->id ?>" class="btn btn-sm btn-warning">แก้ไข</a>
-                                        &nbsp;&nbsp;
-                                        <a onclick="return confirm('คุณต้องการลบข้อมูลนี้ใช่หรือไม่?')" href="/articles/delete.php?id=<?php echo $row->id ?>" class="btn btn-sm btn-danger">ลบ</a>
-                                        &nbsp;&nbsp;
-                                        <form method="post" action="/articles/update_publish.php?id=<?php echo $row->id ?>">
-                                            <button type="submit" class="btn btn-sm btn-info" <?php if ($row->publish_sts == 'Y') {
-                                                                                                    echo "disabled";
-                                                                                                } ?>>
-                                                เผยแพร่
-                                            </button>
-                                            <button type="submit" class="btn btn-sm btn-light" <?php if ($row->publish_sts == 'N') {
-                                                                                                    echo "disabled";
-                                                                                                } ?>>
-                                                ฉบับร่าง
-                                            </button>
-                                            <input type="hidden" name="publishSts" value='<?php if ($row->publish_sts == 'Y') {
-                                                                                                echo "N";
-                                                                                            } else {
-                                                                                                echo "Y";
-                                                                                            } ?>'>
-                                        </form>
-                                    </div>
+                        <?php foreach ($articles_list as $article) { ?>
+                            <div class="table-row">
+                                <div class="serial"><?php echo $article['id'] ?></div>
+                                <div class="visit"><?php echo $article['title'] ?></div>
+                                <div class="visit"><?php echo $article['create_ts'] ?></div>
+                                <div class="visit"><?php echo $article['updatetime'] ?></div>
+                                <div class="visit">
+                                    <h4>
+                                        <?php if ($article['publish_sts'] === 'Y') { ?>
+                                            <span class="badge badge-pill badge-info">เผยแพร่แล้ว</span>
+                                        <?php } else if ($article['publish_sts'] === 'N') { ?>
+                                            <span class="badge badge-pill badge-light">ฉบับร่าง</span>
+                                        <?php } ?>
+                                    </h4>
                                 </div>
-                        <?php
-                            }
-                        } ?>
+                                <div class="visit">
+                                    <a href="edit.php?id=<?php echo $article['id'] ?>" class="btn btn-sm btn-warning">แก้ไข</a>
+                                    &nbsp;&nbsp;
+                                    <a onclick="return confirm('คุณต้องการลบข้อมูลนี้ใช่หรือไม่?')" href="/articles/delete.php?id=<?php echo $article['id'] ?>" class="btn btn-sm btn-danger">ลบ</a>
+                                    &nbsp;&nbsp;
+                                    <form method="post" action="/articles/update_publish.php">
+                                        <button type="submit" class="btn btn-sm btn-info" <?php if ($article['publish_sts'] === 'Y') {
+                                                                                                echo "disabled";
+                                                                                            } ?>>
+                                            เผยแพร่
+                                        </button>
+                                        <button type="submit" class="btn btn-sm btn-light" <?php if ($article['publish_sts'] === 'N') {
+                                                                                                echo "disabled";
+                                                                                            } ?>>
+                                            ฉบับร่าง
+                                        </button>
+                                        <input type="hidden" name="publishSts" value='<?php if ($article['publish_sts'] === 'Y') {
+                                                                                            echo "N";
+                                                                                        } else {
+                                                                                            echo "Y";
+                                                                                        } ?>' />
+                                        <input type="hidden" name="article_id" value='<?php echo $article['id'] ?>' />
+                                    </form>
+                                </div>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -117,7 +114,7 @@ $result = $dbconn->query($sql);
 
     <?php
     include "../components/footer.php";
-    echo footerComponent();
+    echo FooterComponent();
     ?>
 
     <script src="../assets/js/vendor/jquery-2.2.4.min.js"></script>

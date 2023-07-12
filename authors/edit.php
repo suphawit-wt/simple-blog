@@ -7,16 +7,15 @@ if (!isset($_SESSION['loggedin'])) {
 }
 
 // Query Data
-$auid = $_SESSION['auid'];
-$sql = "SELECT *
-         FROM authors
-         WHERE id = ?";
+$author_id = $_SESSION['author_id'];
+
+$sql = "SELECT * FROM authors WHERE id = ?";
 $stmt = $dbconn->prepare($sql);
-$stmt->bind_param("s", $auid);
+$stmt->bind_param("s", $author_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
-$row = $result->fetch_object();
+$author = $result->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="th" class="no-js">
@@ -43,7 +42,7 @@ $row = $result->fetch_object();
 <body>
     <?php
     include "../components/header.php";
-    echo headerComponent();
+    echo HeaderComponent();
     ?>
 
     <!--================ Start Content Area =================-->
@@ -58,7 +57,7 @@ $row = $result->fetch_object();
                         <div class="form-group">
                             <label class="col-md-4 col-form-label">Username</label>
                             <div class="col-md-12">
-                                <input value="<?php echo $row->username ?>" type="text" class="form-control" id="username" name="username" maxlength="45">
+                                <input value="<?php echo $author['username'] ?>" type="text" class="form-control" id="username" name="username" maxlength="45">
                             </div>
                         </div>
                     </div>
@@ -82,7 +81,7 @@ $row = $result->fetch_object();
                         <div class="form-group">
                             <label class="col-md-4 col-form-label">Name</label>
                             <div class="col-md-12">
-                                <input value="<?php echo $row->name ?>" type="text" class="form-control" id="name" name="name" maxlength="45">
+                                <input value="<?php echo $author['name'] ?>" type="text" class="form-control" id="name" name="name" maxlength="45">
                             </div>
                         </div>
                     </div>
@@ -90,7 +89,7 @@ $row = $result->fetch_object();
                         <div class="form-group">
                             <label class="col-md-4 col-form-label">Penname</label>
                             <div class="col-md-12">
-                                <input value="<?php echo $row->penname ?>" type="text" class="form-control" id="penname" name="penname" maxlength="45">
+                                <input value="<?php echo $author['penname'] ?>" type="text" class="form-control" id="penname" name="penname" maxlength="45">
                             </div>
                         </div>
                     </div>
@@ -98,7 +97,7 @@ $row = $result->fetch_object();
                         <div class="form-group">
                             <label class="col-md-4 col-form-label">Email</label>
                             <div class="col-md-12">
-                                <input value="<?php echo $row->email ?>" type="email" class="form-control" id="email" name="email" maxlength="45">
+                                <input value="<?php echo $author['email'] ?>" type="email" class="form-control" id="email" name="email" maxlength="45">
                             </div>
                         </div>
                     </div>
@@ -115,7 +114,7 @@ $row = $result->fetch_object();
 
     <?php
     include "../components/footer.php";
-    echo footerComponent();
+    echo FooterComponent();
     ?>
 
     <script src="../assets/js/vendor/jquery-2.2.4.min.js"></script>

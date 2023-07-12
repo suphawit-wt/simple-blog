@@ -1,5 +1,4 @@
-<?php
-function footerComponent()
+<?php function FooterComponent()
 { ?>
     <!--================ Start Footer Area =================-->
     <footer class="footer-area section-gap">

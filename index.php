@@ -9,10 +9,14 @@ $sql = "SELECT articles.id, articles.title, articles.body ,articles.create_ts,
         FROM articles JOIN authors ON articles.authors_id = authors.id
         WHERE articles.publish_sts = 'Y'
         ORDER BY create_ts DESC
-        LIMIT 0, $limit";
-$result = $dbconn->query($sql);
-$result2 = $dbconn->query($sql);
-$rowcount = mysqli_num_rows($result);
+        LIMIT 0, ?";
+$stmt = $dbconn->prepare($sql);
+$stmt->bind_param("s", $limit);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$articles_list = $result->fetch_all(MYSQLI_ASSOC);
+$articles_count = count($articles_list);
 ?>
 <!DOCTYPE html>
 <html lang="th" class="no-js">
@@ -37,130 +41,124 @@ $rowcount = mysqli_num_rows($result);
 
 <body>
   <?php
-  if (!$result) {
-    echo ("Error: " . $dbconn->error);
-  } else {
-    include "./components/header.php";
-    echo headerComponent();
+  include "./components/header.php";
+  echo HeaderComponent();
   ?>
 
-    <!--================ Start Content Area =================-->
-    <?php if ($rowcount >= 1) { ?>
-      <section class="home-banner-area relative">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="owl-carousel home-banner-owl">
-              <?php
-              while ($row2 = $result2->fetch_object()) {
-              ?>
-                <div class="banner-img">
-                  <img class="img-fluid" src="./assets/img/banner/b1.jpg" alt="" />
-                  <div class="text-wrapper">
-                    <a href="#" class="d-flex">
-                      <h1>
-                        <?php echo $row2->title ?>
-                      </h1>
-                    </a>
-                  </div>
+  <!--================ Start Content Area =================-->
+  <?php if ($articles_count > 0) { ?>
+    <section class="home-banner-area relative">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="owl-carousel home-banner-owl">
+            <?php foreach ($articles_list as $article) { ?>
+              <div class="banner-img">
+                <img class="img-fluid" src="./assets/img/banner/b1.jpg" alt="" />
+                <div class="text-wrapper">
+                  <a href="#" class="d-flex">
+                    <h1>
+                      <?php echo $article['title'] ?>
+                    </h1>
+                  </a>
                 </div>
-              <?php } ?>
-            </div>
+              </div>
+            <?php } ?>
           </div>
         </div>
-        <div class="social-icons">
-          <ul>
-            <li>
-              <a href="index.php"><i class="fa fa-facebook"></i></a>
-            </li>
-            <li>
-              <a href="index.php"><i class="fa fa-twitter"></i></a>
-            </li>
-            <li>
-              <a href="index.php"><i class="fa fa-pinterest"></i></a>
-            </li>
-            <li class="diffrent">share now</li>
-          </ul>
-        </div>
-      </section>
-    <?php } ?>
-    <!--================ End banner Area =================-->
+      </div>
+      <div class="social-icons">
+        <ul>
+          <li>
+            <a href="index.php"><i class="fa fa-facebook"></i></a>
+          </li>
+          <li>
+            <a href="index.php"><i class="fa fa-twitter"></i></a>
+          </li>
+          <li>
+            <a href="index.php"><i class="fa fa-pinterest"></i></a>
+          </li>
+          <li class="diffrent">Share Now</li>
+        </ul>
+      </div>
+    </section>
+  <?php } ?>
+  <!--================ End banner Area =================-->
 
-    <!--================ Start Content Area =================-->
-    <section class="blog-post-area section-gap relative">
-      <div class="container mt-10">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="row">
-              <?php if ($rowcount >= 1) { ?>
-                <?php
-                while ($row = $result->fetch_object()) {
-                ?>
-                  <div class="col-lg-12 col-md-12">
-                    <div class="single-amenities">
-                      <div class="amenities-details">
-                        <h5>
-                          <a href="#"> <?php echo $row->title ?>
+  <!--================ Start Content Area =================-->
+  <section class="blog-post-area section-gap relative">
+    <div class="container mt-10">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <?php if ($articles_count > 0) {
+              foreach ($articles_list as $article) {
+            ?>
+                <div class="col-lg-12 col-md-12">
+                  <div class="single-amenities">
+                    <div class="amenities-details">
+                      <h5>
+                        <a href="#">
+                          <?php echo $article['title'] ?>
+                        </a>
+                      </h5>
+                      <div class="amenities-meta mb-10">
+                        <a href="#" class=""><span class="ti-calendar"></span><?php echo $article['create_ts'] ?></a>
+                        <a href="#" class="ml-20"><span class="ti-comment"></span>0</a>
+                      </div>
+                      <p>
+                        <?php echo $article['body'] ?>
+                      </p>
+                      <div class="d-flex justify-content-between mt-20">
+                        <div class="category">
+                          <a href="#">
+                            <span class="ti-user mr-1"></span> <?php echo $article['penname'] ?>
                           </a>
-                        </h5>
-                        <div class="amenities-meta mb-10">
-                          <a href="#" class=""><span class="ti-calendar"></span><?php echo $row->create_ts ?></a>
-                          <a href="#" class="ml-20"><span class="ti-comment"></span>0</a>
-                        </div>
-                        <p>
-                          <?php echo $row->body ?>
-                        </p>
-                        <div class="d-flex justify-content-between mt-20">
-                          <div class="category">
-                            <a href="#">
-                              <span class="ti-user mr-1"></span> <?php echo $row->penname ?>
-                            </a>
-                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                <?php }
-              } else { ?>
-                <div class="row">
-                  <div class="col-lg-12">
-                    <h2>ไม่มีบทความ</h2>
-                  </div>
                 </div>
-              <?php } ?>
-            </div>
-            <div class="row mt-3">
-              <div class="col-lg-12">
-                <nav class="blog-pagination justify-content-center d-flex">
-                  <ul class="pagination">
-                    <li class="page-item">
-                      <a href="#" class="page-link" aria-label="Previous">
-                        <span aria-hidden="true">
-                          <span class="ti-arrow-left"></span>
-                        </span>
-                      </a>
-                    </li>
-                    <li class="page-item active"><a href="#" class="page-link">01</a></li>
-                    <li class="page-item">
-                      <a href="#" class="page-link" aria-label="Next">
-                        <span aria-hidden="true">
-                          <span class="ti-arrow-right"></span>
-                        </span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
+              <?php }
+            } else { ?>
+              <div class="row">
+                <div class="col-lg-12">
+                  <h2>ไม่มีบทความ</h2>
+                </div>
               </div>
+            <?php } ?>
+          </div>
+          <div class="row mt-3">
+            <div class="col-lg-12">
+              <nav class="blog-pagination justify-content-center d-flex">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a href="#" class="page-link" aria-label="Previous">
+                      <span aria-hidden="true">
+                        <span class="ti-arrow-left"></span>
+                      </span>
+                    </a>
+                  </li>
+                  <li class="page-item active"><a href="#" class="page-link">01</a></li>
+                  <li class="page-item">
+                    <a href="#" class="page-link" aria-label="Next">
+                      <span aria-hidden="true">
+                        <span class="ti-arrow-right"></span>
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
         </div>
       </div>
-    </section>
-    <!--================ End Content Area =================-->
+    </div>
+  </section>
+  <!--================ End Content Area =================-->
 
   <?php
-    include "./components/footer.php";
-    echo footerComponent();
-  }
+  include "./components/footer.php";
+  echo FooterComponent();
   ?>
 
   <script src="./assets/js/vendor/jquery-2.2.4.min.js"></script>
