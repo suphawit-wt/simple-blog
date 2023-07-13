@@ -39,27 +39,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="shortcut icon" href="./assets/img/fav.png" />
-    <meta charset="UTF-8" />
+    <link rel="shortcut icon" href="/assets/img/fav.png" />
+    <meta charset="utf-8" />
     <title>BabyBlog</title>
 
-    <link rel="stylesheet" href="./assets/css/linearicons.css" />
-    <link rel="stylesheet" href="./assets/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="./assets/css/magnific-popup.css" />
-    <link rel="stylesheet" href="./assets/css/nice-select.css" />
-    <link rel="stylesheet" href="./assets/css/owl.carousel.css" />
-    <link rel="stylesheet" href="./assets/css/bootstrap.css" />
-    <link rel="stylesheet" href="./assets/css/bootstrap-datepicker.css" />
-    <link rel="stylesheet" href="./assets/css/themify-icons.css" />
-    <link rel="stylesheet" href="./assets/css/main.css" />
-    <link rel="stylesheet" href="./assets/css/custom.css" />
+    <link rel="stylesheet" href="/assets/css/linearicons.css" />
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/assets/css/magnific-popup.css" />
+    <link rel="stylesheet" href="/assets/css/nice-select.css" />
+    <link rel="stylesheet" href="/assets/css/owl.carousel.css" />
+    <link rel="stylesheet" href="/assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="/assets/css/bootstrap-datepicker.css" />
+    <link rel="stylesheet" href="/assets/css/themify-icons.css" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <link rel="stylesheet" href="/assets/css/custom.css" />
 </head>
 
 <body>
-    <?php
-    include "./components/header.php";
-    echo HeaderComponent();
-    ?>
+    <?php require_once "./components/header.php"; ?>
 
     <!--================ Start Content Area =================-->
     <section class="container mt-20 mb-20">
@@ -88,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="col-6">
                         <div class="col-12 ">
                             <button type="submit" class="btn btn-primary">เข้าสู่ระบบ</button>
-                            <a href="register.php" class="btn btn-link">ลงทะเบียนผู้แต่ง</a>
+                            <a href="/register.php" class="btn btn-link">ลงทะเบียนผู้แต่ง</a>
                         </div>
                         <div class="col-12">
                             <p class="text-danger mt-2"><?php echo $_SESSION['errMsg']; ?></p>
@@ -100,24 +97,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </section>
     <!--================ End Content Area =================-->
 
-    <?php
-    include "./components/footer.php";
-    echo FooterComponent();
-    ?>
+    <?php require_once "./components/footer.php"; ?>
 
-    <script src="./assets/js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="/assets/js/vendor/jquery-2.2.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous">
     </script>
-    <script src="./assets/js/vendor/bootstrap.min.js"></script>
-    <script src="./assets/js/owl.carousel.min.js"></script>
-    <script src="./assets/js/jquery.sticky.js"></script>
-    <script src="./assets/js/jquery.tabs.min.js"></script>
-    <script src="./assets/js/parallax.min.js"></script>
-    <script src="./assets/js/jquery.nice-select.min.js"></script>
-    <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
-    <script src="./assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="./assets/js/bootstrap-datepicker.js"></script>
-    <script src="./assets/js/main.js"></script>
+    <script src="/assets/js/vendor/bootstrap.min.js"></script>
+    <script src="/assets/js/owl.carousel.min.js"></script>
+    <script src="/assets/js/jquery.sticky.js"></script>
+    <script src="/assets/js/jquery.tabs.min.js"></script>
+    <script src="/assets/js/parallax.min.js"></script>
+    <script src="/assets/js/jquery.nice-select.min.js"></script>
+    <script src="/assets/js/jquery.ajaxchimp.min.js"></script>
+    <script src="/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="/assets/js/bootstrap-datepicker.js"></script>
+    <script src="/assets/js/main.js"></script>
 </body>
 
 </html>

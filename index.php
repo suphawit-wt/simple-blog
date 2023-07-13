@@ -16,44 +16,40 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 $articles_list = $result->fetch_all(MYSQLI_ASSOC);
-$articles_count = count($articles_list);
 ?>
 <!DOCTYPE html>
 <html lang="th" class="no-js">
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <link rel="shortcut icon" href="./assets/img/fav.png" />
-  <meta charset="UTF-8" />
+  <link rel="shortcut icon" href="/assets/img/fav.png" />
+  <meta charset="utf-8" />
   <title>BabyBlog</title>
 
-  <link rel="stylesheet" href="./assets/css/linearicons.css" />
-  <link rel="stylesheet" href="./assets/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="./assets/css/magnific-popup.css" />
-  <link rel="stylesheet" href="./assets/css/nice-select.css" />
-  <link rel="stylesheet" href="./assets/css/owl.carousel.css" />
-  <link rel="stylesheet" href="./assets/css/bootstrap.css" />
-  <link rel="stylesheet" href="./assets/css/bootstrap-datepicker.css" />
-  <link rel="stylesheet" href="./assets/css/themify-icons.css" />
-  <link rel="stylesheet" href="./assets/css/main.css" />
-  <link rel="stylesheet" href="./assets/css/custom.css" />
+  <link rel="stylesheet" href="/assets/css/linearicons.css" />
+  <link rel="stylesheet" href="/assets/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="/assets/css/magnific-popup.css" />
+  <link rel="stylesheet" href="/assets/css/nice-select.css" />
+  <link rel="stylesheet" href="/assets/css/owl.carousel.css" />
+  <link rel="stylesheet" href="/assets/css/bootstrap.css" />
+  <link rel="stylesheet" href="/assets/css/bootstrap-datepicker.css" />
+  <link rel="stylesheet" href="/assets/css/themify-icons.css" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <link rel="stylesheet" href="/assets/css/custom.css" />
 </head>
 
 <body>
-  <?php
-  include "./components/header.php";
-  echo HeaderComponent();
-  ?>
+  <?php require_once "./components/header.php"; ?>
 
   <!--================ Start Content Area =================-->
-  <?php if ($articles_count > 0) { ?>
+  <?php if (!empty($articles_list)) : ?>
     <section class="home-banner-area relative">
       <div class="container-fluid">
         <div class="row">
           <div class="owl-carousel home-banner-owl">
-            <?php foreach ($articles_list as $article) { ?>
+            <?php foreach ($articles_list as $article) : ?>
               <div class="banner-img">
-                <img class="img-fluid" src="./assets/img/banner/b1.jpg" alt="" />
+                <img class="img-fluid" src="/assets/img/banner/b1.jpg" alt="banner" />
                 <div class="text-wrapper">
                   <a href="#" class="d-flex">
                     <h1>
@@ -62,26 +58,26 @@ $articles_count = count($articles_list);
                   </a>
                 </div>
               </div>
-            <?php } ?>
+            <?php endforeach; ?>
           </div>
         </div>
       </div>
       <div class="social-icons">
         <ul>
           <li>
-            <a href="index.php"><i class="fa fa-facebook"></i></a>
+            <a href="/"><i class="fa fa-facebook"></i></a>
           </li>
           <li>
-            <a href="index.php"><i class="fa fa-twitter"></i></a>
+            <a href="/"><i class="fa fa-twitter"></i></a>
           </li>
           <li>
-            <a href="index.php"><i class="fa fa-pinterest"></i></a>
+            <a href="/"><i class="fa fa-pinterest"></i></a>
           </li>
           <li class="diffrent">Share Now</li>
         </ul>
       </div>
     </section>
-  <?php } ?>
+  <?php endif; ?>
   <!--================ End banner Area =================-->
 
   <!--================ Start Content Area =================-->
@@ -90,9 +86,8 @@ $articles_count = count($articles_list);
       <div class="row">
         <div class="col-lg-12">
           <div class="row">
-            <?php if ($articles_count > 0) {
-              foreach ($articles_list as $article) {
-            ?>
+            <?php if (!empty($articles_list)) : ?>
+              <?php foreach ($articles_list as $article) : ?>
                 <div class="col-lg-12 col-md-12">
                   <div class="single-amenities">
                     <div class="amenities-details">
@@ -118,14 +113,14 @@ $articles_count = count($articles_list);
                     </div>
                   </div>
                 </div>
-              <?php }
-            } else { ?>
+              <?php endforeach; ?>
+            <?php else : ?>
               <div class="row">
                 <div class="col-lg-12">
                   <h2>ไม่มีบทความ</h2>
                 </div>
               </div>
-            <?php } ?>
+            <?php endif; ?>
           </div>
           <div class="row mt-3">
             <div class="col-lg-12">
@@ -156,24 +151,21 @@ $articles_count = count($articles_list);
   </section>
   <!--================ End Content Area =================-->
 
-  <?php
-  include "./components/footer.php";
-  echo FooterComponent();
-  ?>
+  <?php require_once "./components/footer.php"; ?>
 
-  <script src="./assets/js/vendor/jquery-2.2.4.min.js"></script>
+  <script src="/assets/js/vendor/jquery-2.2.4.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous">
   </script>
-  <script src="./assets/js/vendor/bootstrap.min.js"></script>
-  <script src="./assets/js/owl.carousel.min.js"></script>
-  <script src="./assets/js/jquery.sticky.js"></script>
-  <script src="./assets/js/jquery.tabs.min.js"></script>
-  <script src="./assets/js/parallax.min.js"></script>
-  <script src="./assets/js/jquery.nice-select.min.js"></script>
-  <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
-  <script src="./assets/js/jquery.magnific-popup.min.js"></script>
-  <script src="./assets/js/bootstrap-datepicker.js"></script>
-  <script src="./assets/js/main.js"></script>
+  <script src="/assets/js/vendor/bootstrap.min.js"></script>
+  <script src="/assets/js/owl.carousel.min.js"></script>
+  <script src="/assets/js/jquery.sticky.js"></script>
+  <script src="/assets/js/jquery.tabs.min.js"></script>
+  <script src="/assets/js/parallax.min.js"></script>
+  <script src="/assets/js/jquery.nice-select.min.js"></script>
+  <script src="/assets/js/jquery.ajaxchimp.min.js"></script>
+  <script src="/assets/js/jquery.magnific-popup.min.js"></script>
+  <script src="/assets/js/bootstrap-datepicker.js"></script>
+  <script src="/assets/js/main.js"></script>
 </body>
 
 </html>
