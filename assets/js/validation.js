@@ -1,6 +1,6 @@
 function formValidation() {
     var usrname = document.registform.username;
-    var pwd = document.registform.passwd;
+    var pwd = document.registform.password;
     var conpwd = document.registform.conpasswd;
     var name = document.registform.name;
     var penname = document.registform.penname;
@@ -36,13 +36,13 @@ function validateTitle(titleA, min, max) {
     var illegalChars = /\W/;
 
     if (titleA.value == "") {
-        titleA.style.background = 'Yellow';
+        titleA.style.borderColor = "red";
         error = "กรุณากรอก หัวข้อ \n";
         alert(error);
         titleA.focus();
         return false;
     } else {
-        titleA.style.background = 'White';
+        titleA.style.borderColor = "#CEDADA";
     }
     return true;
 }
@@ -52,25 +52,25 @@ function validateUserName(usrname, min, max) {
     var illegalChars = /\W/;
 
     if (usrname.value == "") {
-        usrname.style.background = 'Yellow';
+        usrname.style.borderColor = "red";
         error = "กรุณากรอก Username \n";
         alert(error);
         usrname.focus();
         return false;
     } else if ((usrname.value.length < min) || (usrname.value.length > max)) {
-        usrname.style.background = 'Yellow';
+        usrname.style.borderColor = "red";
         error = "User ID ต้องมีความยาว " + min + "-" + max + " ตัวอักษร\n";
         alert(error);
         usrname.focus();
         return false;
     } else if (illegalChars.test(usrname.value)) {
-        usrname.style.background = 'Yellow';
+        usrname.style.borderColor = "red";
         error = "User ID มีตัวอักษรที่ไม่ได้รับอนุญาติ\n";
         alert(error);
         usrname.focus();
         return false;
     } else {
-        usrname.style.background = 'White';
+        usrname.style.borderColor = "#CEDADA";
     }
     return true;
 }
@@ -80,20 +80,20 @@ function validatePassword(pwd, uconfirmpwd, min, max) {
     var illegalChars = /[\W_]/;
 
     if (pwd.value == "") {
-        pwd.style.background = 'Yellow';
+        pwd.style.borderColor = "red";
         error = "กรุณาป้อน Password\n";
         alert(error);
         pwd.focus();
         return false;
     } else if ((pwd.value.length < min) || (pwd.value.length > max)) {
         error = "Password ต้องมีความยาว " + min + "-" + max + " ตัวอักษร\n";
-        pwd.style.background = 'Yellow';
+        pwd.style.borderColor = "red";
         alert(error);
         pwd.focus();
         return false;
     } else if (illegalChars.test(pwd.value)) {
         error = "Password มีตัวอักษรที่ไม่ได้รับอนุญาติ\n";
-        pwd.style.background = 'Yellow';
+        pwd.style.borderColor = "red";
         alert(error);
         pwd.focus();
         return false;
@@ -120,7 +120,7 @@ function validatePassword(pwd, uconfirmpwd, min, max) {
 function validateName(name) {
     var letters = /^[A-Za-z]+$/;
     if (name.value == "") {
-        name.style.background = 'Yellow';
+        name.style.borderColor = "red";
         error = "กรุณากรอก ชื่อผู้แต่ง\n";
         alert(error);
         name.focus();
@@ -137,7 +137,7 @@ function validateName(name) {
 function validatePenName(penname) {
     var letters = /^[0-9a-zA-Z]+$/;
     if (penname.value == "") {
-        penname.style.background = 'Yellow';
+        penname.style.borderColor = "red";
         error = "กรุณากรอก นามปากกา\n";
         alert(error);
         penname.focus();
@@ -154,7 +154,7 @@ function validatePenName(penname) {
 function validateEmail(email) {
     var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     if (email.value == "") {
-        email.style.background = 'Yellow';
+        email.style.borderColor = "red";
         error = "กรุณากรอก อีเมล์\n";
         alert(error);
         email.focus();

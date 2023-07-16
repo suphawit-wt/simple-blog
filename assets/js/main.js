@@ -20,25 +20,25 @@ $(document).ready(function () {
   // });
 
   //------- Active Nice Select --------//
-  $("select").niceSelect();
+  // $("select").niceSelect();
 
   /*----------------------------------------------------*/
   /*  Magnific Pop up js (Home Video)
     /*----------------------------------------------------*/
-  $("#play-video").magnificPopup({
-    type: "iframe",
-    mainClass: "mfp-fade",
-    removalDelay: 160,
-    preloader: false,
-    fixedContentPos: false
-  });
+  // $("#play-video").magnificPopup({
+  //   type: "iframe",
+  //   mainClass: "mfp-fade",
+  //   removalDelay: 160,
+  //   preloader: false,
+  //   fixedContentPos: false
+  // });
 
-  $(".img-pop-up").magnificPopup({
-    type: "image",
-    gallery: {
-      enabled: true
-    }
-  });
+  // $(".img-pop-up").magnificPopup({
+  //   type: "image",
+  //   gallery: {
+  //     enabled: true
+  //   }
+  // });
 
   // -------   Owl Carousel -----//0
   function home_banner_slider() {
@@ -54,8 +54,8 @@ $(document).ready(function () {
         responsiveClass: true,
         stagePadding: 140,
         navText: [
-          "<img src='img/prev.png' alt='' />",
-          "<img src='img/next.png' alt='' />"
+          "<img src='/assets/img/prev.png' alt='' />",
+          "<img src='/assets/img/next.png' alt='' />"
         ],
         responsive: {
           0: {
@@ -232,9 +232,9 @@ $(document).ready(function () {
     }
   }
 
-  $("#mc_embed_signup")
-    .find("form")
-    .ajaxChimp();
+  // $("#mc_embed_signup")
+  //   .find("form")
+  //   .ajaxChimp();
   // -------   Mail Send ajax
   $(document).ready(function () {
     var form = $("#myForm"); // contact form
