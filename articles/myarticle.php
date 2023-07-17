@@ -28,7 +28,7 @@ $articles_list = $result->fetch_all(MYSQLI_ASSOC);
     <title>BabyBlog</title>
 
     <link rel="stylesheet" href="/assets/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="/assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/assets/css/themify-icons.css" />
     <link rel="stylesheet" href="/assets/css/main.css" />
     <link rel="stylesheet" href="/assets/css/custom.css" />
