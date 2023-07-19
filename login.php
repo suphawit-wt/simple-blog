@@ -1,6 +1,5 @@
 <?php
 session_start();
-require_once('./db/connect.php');
 
 if (isset($_SESSION['loggedin'])) {
     header("location: /articles/myarticle.php");
@@ -9,6 +8,8 @@ if (isset($_SESSION['loggedin'])) {
 $_SESSION['errMsg'] = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    require_once('./db/connect.php');
+
     $username = $_POST['username'];
     $passwd =  md5($_POST['password']);
 

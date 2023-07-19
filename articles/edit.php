@@ -1,10 +1,11 @@
 <?php
 session_start();
-require_once('../db/connect.php');
 
 if (!isset($_SESSION['loggedin'])) {
     header("location: /login.php");
 }
+
+require_once('../db/connect.php');
 
 // Query Data
 $article_id = $_GET['id'];
