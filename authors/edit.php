@@ -19,7 +19,7 @@ $result = $stmt->get_result();
 $author = $result->fetch_assoc();
 ?>
 <!DOCTYPE html>
-<html lang="th" class="no-js">
+<html lang="en" class="no-js">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -43,7 +43,7 @@ $author = $result->fetch_assoc();
         <form method="post" action="/authors/update.php">
             <div class="row">
                 <div class="col-12">
-                    <h3 class="mb-10">แก้ไขข้อมูลของฉัน</h3>
+                    <h3 class="mb-10">Edit Profile</h3>
                 </div>
                 <div class="col-12">
                     <div class="col-6">
@@ -96,7 +96,7 @@ $author = $result->fetch_assoc();
                     </div>
                     <div class="col-6">
                         <div class="col-12 ">
-                            <button type="submit" class="btn btn-warning">อัพเดท</button>
+                            <button type="submit" class="btn btn-warning">Update</button>
                         </div>
                     </div>
                 </div>

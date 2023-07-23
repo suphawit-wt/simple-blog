@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         header("location: /articles/myarticle.php");
     } else {
-        echo "<script type='text/javascript'>alert('*ไม่สามารถแก้ไขบทความนี้ได้ เนื่องจากคุณไม่ใช่เจ้าของ');history.go(-1);</script>";
+        echo "<script type='text/javascript'>alert('*Forbidden, You doesn't have permission.');history.go(-1);</script>";
     }
 } else {
     header("location: /");

@@ -20,7 +20,7 @@ $result = $stmt->get_result();
 $articles_list = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
-<html lang="th" class="no-js">
+<html lang="en" class="no-js">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />

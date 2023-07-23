@@ -25,9 +25,9 @@
                             <?php if (isset($_SESSION['loggedin'])) : ?>
                                 <li class="nav-item">
                                     <div class="nav-link">
-                                        <span class="mr-1">ชื่อผู้แต่ง : <?php echo $_SESSION['username'] ?> </span>
+                                        <span class="mr-1">Username: <?php echo $_SESSION['username'] ?> </span>
                                         <a class="btn btn-sm btn-warning" href="/authors/edit.php">
-                                            <span><i class="ti-pencil"></i> แก้ไขข้อมูล</span>
+                                            <span><i class="ti-pencil"></i> Edit Profile</span>
                                         </a>
                                     </div>
                                 </li>

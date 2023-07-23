@@ -20,11 +20,11 @@ $result = $stmt->get_result();
 $article = $result->fetch_assoc();
 
 if (empty($article)) {
-    echo "<script type='text/javascript'>alert('*ไม่สามารถเรียกดูบทความนี้ได้ เนื่องจากคุณไม่ใช่เจ้าของ');history.go(-1);</script>";
+    echo "<script type='text/javascript'>alert('*Forbidden, You doesn't have permission.');history.go(-1);</script>";
 }
 ?>
 <!DOCTYPE html>
-<html lang="th" class="no-js">
+<html lang="en" class="no-js">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />

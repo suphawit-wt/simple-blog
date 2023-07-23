@@ -7,7 +7,7 @@ if (isset($_SESSION['loggedin'])) {
 
 ?>
 <!DOCTYPE html>
-<html lang="th" class="no-js">
+<html lang="en" class="no-js">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -30,7 +30,7 @@ if (isset($_SESSION['loggedin'])) {
         <form method="post" name="registform" onSubmit="return formValidation();" action="/authors/create.php">
             <div class="row">
                 <div class="col-12">
-                    <h3 class="mb-10">ลงทะเบียนผู้แต่ง</h3>
+                    <h3 class="mb-10">Register</h3>
                 </div>
                 <div class="col-12">
                     <div class="col-6">
@@ -83,8 +83,8 @@ if (isset($_SESSION['loggedin'])) {
                     </div>
                     <div class="col-6">
                         <div class="col-12 ">
-                            <button type="submit" class="btn btn-success">ลงทะเบียน</button>
-                            <a href="/login.php" class="btn btn-link">กลับไปยังหน้าเข้าสู่ระบบ</a>
+                            <button type="submit" class="btn btn-success">Register</button>
+                            <a href="/login.php" class="btn btn-link">Back to Login page</a>
                         </div>
                     </div>
                 </div>

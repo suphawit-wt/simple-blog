@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <!DOCTYPE html>
-<html lang="th" class="no-js">
+<html lang="en" class="no-js">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form method="post" action="/login.php">
             <div class="row">
                 <div class="col-12">
-                    <h3 class="mb-10">เข้าสู่ระบบ</h3>
+                    <h3 class="mb-10">Login</h3>
                 </div>
                 <div class="col-12">
                     <div class="col-6">
@@ -79,8 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <div class="col-6">
                         <div class="col-12 ">
-                            <button type="submit" class="btn btn-primary">เข้าสู่ระบบ</button>
-                            <a href="/register.php" class="btn btn-link">ลงทะเบียนผู้แต่ง</a>
+                            <button type="submit" class="btn btn-primary">Login</button>
+                            <a href="/register.php" class="btn btn-link">Register</a>
                         </div>
                         <div class="col-12">
                             <p class="text-danger mt-2"><?php echo $_SESSION['errMsg']; ?></p>

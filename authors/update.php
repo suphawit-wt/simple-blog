@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         header("location: /articles/myarticle.php");
     } else {
-        echo "<script type='text/javascript'>alert('*Username $username ได้ถูกใช้แล้ว');history.go(-1);</script>";
+        echo "<script type='text/javascript'>alert('*Username $username already in use!');history.go(-1);</script>";
     }
 } else {
     header("location: /");
