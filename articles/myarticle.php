@@ -42,18 +42,18 @@ $articles_list = $result->fetch_all(MYSQLI_ASSOC);
     <section class="container mt-20 mb-20">
         <div class="row">
             <div class="col-12">
-                <h3 class="mb-10">บทความของฉัน <a href="/articles/new.php" class="btn btn-sm btn-primary">เพิ่มบทความใหม่</a></h3>
+                <h3 class="mb-10">My Article <a href="/articles/new.php" class="btn btn-sm btn-primary">Create new article</a></h3>
             </div>
             <div class="col-12">
                 <div class="progress-table-wrap">
                     <div class="progress-table">
                         <div class="table-head">
-                            <div class="serial">id</div>
-                            <div class="visit">ชื่อบทความ</div>
-                            <div class="visit">เวลาที่สร้าง</div>
-                            <div class="visit">แก้ไขล่าสุดเมื่อ</div>
-                            <div class="visit">สถานะ</div>
-                            <div class="visit">การดำเนินการ</div>
+                            <div class="serial">ID</div>
+                            <div class="visit">Title</div>
+                            <div class="visit">Create At</div>
+                            <div class="visit">Last Updated</div>
+                            <div class="visit">Status</div>
+                            <div class="visit">Action</div>
                         </div>
                         <?php foreach ($articles_list as $article) : ?>
                             <div class="table-row">
@@ -64,23 +64,25 @@ $articles_list = $result->fetch_all(MYSQLI_ASSOC);
                                 <div class="visit">
                                     <h4>
                                         <?php if ($article['publish_sts'] === 'Y') : ?>
-                                            <span class="badge badge-pill badge-info">เผยแพร่แล้ว</span>
+                                            <span class="badge badge-pill badge-info">Publish</span>
                                         <?php elseif ($article['publish_sts'] === 'N') : ?>
-                                            <span class="badge badge-pill badge-light">ฉบับร่าง</span>
+                                            <span class="badge badge-pill badge-light">Draft</span>
                                         <?php endif; ?>
                                     </h4>
                                 </div>
                                 <div class="visit">
-                                    <a href="edit.php?id=<?php echo $article['id'] ?>" class="btn btn-sm btn-warning">แก้ไข</a>
+                                    <a href="edit.php?id=<?php echo $article['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
                                     &nbsp;&nbsp;
-                                    <a onclick="return confirm('คุณต้องการลบข้อมูลนี้ใช่หรือไม่?')" href="/articles/delete.php?id=<?php echo $article['id'] ?>" class="btn btn-sm btn-danger">ลบ</a>
+                                    <a onclick="return confirm('Do you want to delete this article?')" href="/articles/delete.php?id=<?php echo $article['id'] ?>" class="btn btn-sm btn-danger">
+                                        Delete
+                                    </a>
                                     &nbsp;&nbsp;
                                     <form method="post" action="/articles/update_publish.php">
                                         <button type="submit" class="btn btn-sm btn-info" <?php echo (($article['publish_sts'] === 'Y') ? "disabled" : "") ?>>
-                                            เผยแพร่
+                                            Publish
                                         </button>
                                         <button type="submit" class="btn btn-sm btn-light" <?php echo (($article['publish_sts'] === 'N') ? "disabled" : "") ?>>
-                                            ฉบับร่าง
+                                            Draft
                                         </button>
                                         <input type="hidden" name="publishSts" value='<?php echo (($article['publish_sts'] === 'Y') ? "N" : "Y") ?>' />
                                         <input type="hidden" name="article_id" value='<?php echo $article['id'] ?>' />

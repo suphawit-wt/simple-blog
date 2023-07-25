@@ -4,7 +4,6 @@ session_start();
 if (isset($_SESSION['loggedin'])) {
     header("location: /articles/myarticle.php");
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -22,12 +21,12 @@ if (isset($_SESSION['loggedin'])) {
     <script src="/assets/js/validation.js"></script>
 </head>
 
-<body onload="document.registform.userid.focus();">
+<body onload="document.author_form.userid.focus();">
     <?php require_once "./components/header.php"; ?>
 
     <!--================ Start Content Area =================-->
     <section class="container mt-20 mb-20">
-        <form method="post" name="registform" onSubmit="return formValidation();" action="/authors/create.php">
+        <form action="/authors/create.php" method="post" name="author_form" onSubmit="return formValidation();">
             <div class="row">
                 <div class="col-12">
                     <h3 class="mb-10">Register</h3>

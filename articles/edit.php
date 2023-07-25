@@ -47,7 +47,7 @@ if (empty($article)) {
         <form method="post" action="/articles/update.php">
             <div class="row">
                 <div class="col-12">
-                    <h3 class="mb-10">แก้ไขบทความ <a href="/articles/myarticle.php" class="btn btn-sm btn-primary">ไปยังหน้า: บทความของฉัน</a></h3>
+                    <h3 class="mb-10">Edit article <a href="/articles/myarticle.php" class="btn btn-sm btn-primary">Back to: My Article</a></h3>
                 </div>
                 <div class="col-12">
                     <div class="col-6">
@@ -61,7 +61,7 @@ if (empty($article)) {
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label class="col-md-4 col-form-label">หัวข้อ</label>
+                            <label class="col-md-4 col-form-label">Title</label>
                             <div class="col-md-12">
                                 <input type="text" class="form-control" name="title" value="<?php echo $article['title'] ?>">
                             </div>
@@ -69,7 +69,7 @@ if (empty($article)) {
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label class="col-md-4 col-form-label">เนื้อหา</label>
+                            <label class="col-md-4 col-form-label">Content</label>
                             <div class="col-md-12">
                                 <textarea type="text" class="form-control" name="body"><?php echo $article['body'] ?></textarea>
                             </div>
@@ -77,14 +77,14 @@ if (empty($article)) {
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label class="col-md-4 col-form-label">สถานะ</label>
+                            <label class="col-md-4 col-form-label">Status</label>
                             <div class="col-md-12">
                                 <select name="publishSts" class="custom-select">
                                     <option value='Y' <?php echo (($article['publish_sts'] === 'Y') ? "selected" : "") ?>>
-                                        เผยแพร่แล้ว
+                                        Publish
                                     </option>
                                     <option value='N' <?php echo (($article['publish_sts'] === 'N') ? "selected" : "") ?>>
-                                        ฉบับร่าง
+                                        Draft
                                     </option>
                                 </select>
                             </div>
@@ -94,11 +94,11 @@ if (empty($article)) {
                         <div class="form-group">
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-warning">
-                                    อัพเดท
+                                    Update
                                 </button>
                                 &nbsp;&nbsp;
-                                <a onclick="return confirm('คุณต้องการลบข้อมูลนี้ใช่หรือไม่?')" href="/articles/delete.php?id=<?php echo $article['id'] ?>" class="btn btn-sm btn-danger">
-                                    ลบ
+                                <a onclick="return confirm('Do you want to delete this article?')" href="/articles/delete.php?id=<?php echo $article['id'] ?>" class="btn btn-sm btn-danger">
+                                    Delete
                                 </a>
                             </div>
                         </div>

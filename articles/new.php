@@ -27,15 +27,15 @@ if (!isset($_SESSION['loggedin'])) {
 
     <!--================ Start Content Area =================-->
     <section class="container mt-20 mb-20">
-        <form method="post" action="/articles/create.php" name="newarti" onSubmit="return newArtiValidation();">
+        <form method="post" action="/articles/create.php" name="article_form" onSubmit="return newArtiValidation();">
             <div class="row">
                 <div class="col-12">
-                    <h3 class="mb-10">เพิ่มบทความใหม่ <a href="/articles/myarticle.php" class="btn btn-sm btn-primary">ไปยังหน้า: บทความของฉัน</a></h3>
+                    <h3 class="mb-10">Create new article <a href="/articles/myarticle.php" class="btn btn-sm btn-primary">Back to: My Article</a></h3>
                 </div>
                 <div class="col-12">
                     <div class="col-6">
                         <div class="form-group">
-                            <label class="col-md-4 col-form-label">หัวข้อ</label>
+                            <label class="col-md-4 col-form-label">Title</label>
                             <div class="col-md-12">
                                 <input type="text" class="form-control" name="title">
                             </div>
@@ -43,7 +43,7 @@ if (!isset($_SESSION['loggedin'])) {
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label class="col-md-4 col-form-label">เนื้อหา</label>
+                            <label class="col-md-4 col-form-label">Content</label>
                             <div class="col-md-12">
                                 <textarea type="text" class="form-control" name="body"></textarea>
                             </div>
@@ -51,7 +51,7 @@ if (!isset($_SESSION['loggedin'])) {
                     </div>
                     <div class="col-6">
                         <div class="col-12 ">
-                            <button type="submit" class="btn btn-primary">เพิ่มบทความใหม่</button>
+                            <button type="submit" class="btn btn-primary">Create</button>
                         </div>
                         <div class="col-12">
                             <p class="text-danger mt-2"><?php echo $_SESSION['errMsg']; ?></p>

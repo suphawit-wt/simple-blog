@@ -40,7 +40,7 @@ $author = $result->fetch_assoc();
 
     <!--================ Start Content Area =================-->
     <section class="container mt-20 mb-20">
-        <form method="post" action="/authors/update.php">
+        <form action="/authors/update.php" method="post" name="author_form" onSubmit="return formValidation();">
             <div class="row">
                 <div class="col-12">
                     <h3 class="mb-10">Edit Profile</h3>
@@ -58,7 +58,7 @@ $author = $result->fetch_assoc();
                         <div class="form-group">
                             <label class="col-md-4 col-form-label">Password</label>
                             <div class="col-md-12">
-                                <input type="password" class="form-control" id="password" name="password" maxlength="45">
+                                <input type="password" class="form-control" id="password" name="password" maxlength="45" required>
                             </div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@ $author = $result->fetch_assoc();
                         <div class="form-group">
                             <label class="col-md-4 col-form-label">Confirm Password</label>
                             <div class="col-md-12">
-                                <input type="password" class="form-control" id="conpasswd" name="conpasswd" maxlength="45">
+                                <input type="password" class="form-control" id="conpasswd" name="conpasswd" maxlength="45" required>
                             </div>
                         </div>
                     </div>
