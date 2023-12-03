@@ -1,1 +1,4 @@
-## Simple Blog
+# Simple Blog
+
+### Tools
+- Database: MySQL
